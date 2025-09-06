@@ -1,0 +1,40 @@
+going to write brainstorming concepts here.
+
+IDEAS:
+-little gremlin that tries to come up with words. pet game.
+-black hole themed shmup
+-a robot tries to make guitar music sound good. makes various pitches
+ and asks: "is this any good?"
+-some kind of strategy game? lmao it's all i want.
+
+we are going with the gremlin concept
+
+so what are we doing?
+
+we need a little guy in a room with a bed,
+a computer, and a table for eating.
+
+he needs to be working, will randomly come up with
+words, ask if they are words.
+
+can be switched to write poetry.
+
+to do list:
+-gremlin. has several states.
+  -eating -
+  -sleeping
+  -working
+-food meter. ticks down over time, replenished by eating
+-sleep meter. ticks down over time, replenished by sleeping
+-work. will randomly attempt to string together characters. will randomly ask player if they made a word.
+ if they succeeded, will add to dictionary
+-dictionary. can view list of words with timestamp.
+
+i dont want to do this project lol.
+
+what if i ditch the theory part and just make a spider that spins webs and tries not to die.
+
+-procedurally generate web like structures
+-make flies randomly fly around
+-if a fly gets caught the spider eats it.
+-the string part comes in bc you enter a string to act as the seed for the web + level
