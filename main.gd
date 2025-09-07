@@ -2,14 +2,23 @@ extends Node2D
 
 var fly_scene = preload('res://fly.tscn')
 
+var score: int = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$FlySpawnTimer.start()
 	$FoodTimer.start()
+	$LifeTimer.start()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	#animate BG
+	#$Main/BG/FastNoiseLite.offset += Vector3(
+		#randf_range(1.0, 5.0),
+		#randf_range(1.0, 5.0),
+		#randf_range(1.0, 5.0),
+		#)
 	$FoodBar.value = $FoodTimer.time_left
 
 
@@ -35,3 +44,13 @@ func _on_spider_ate_food() -> void:
 func _on_food_timer_timeout() -> void:
 	print('spider has died')
 	#use this for game over logic
+
+func get_converted_time(time: int) -> String:
+	var minutes: int = floori(time / 60.0)
+	var seconds: int = time % 60
+	return "%02d:%02d" % [minutes, seconds]
+
+
+func _on_life_timer_timeout() -> void:
+	score += 1
+	$ScoreDisplay.text = str(get_converted_time(score))
