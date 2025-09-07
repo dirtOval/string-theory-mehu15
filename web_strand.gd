@@ -18,3 +18,5 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	body.get_node("AnimatedSprite2D").animation = 'stuck'
 	body.linear_velocity = Vector2(0, 0)
+	body.add_to_group('caught_flies')
+	#print(get_tree().get_nodes_in_group("caught_flies"))

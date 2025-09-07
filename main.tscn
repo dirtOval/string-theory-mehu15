@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx2nxtcrodub4"]
+[gd_scene load_steps=5 format=3 uid="uid://cx2nxtcrodub4"]
 
 [ext_resource type="Script" uid="uid://h1ar55xsdmwn" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://de0renl7wmjg4" path="res://web.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dx4pwjmvovlrg" path="res://spider.tscn" id="3_h2yge"]
 
 [sub_resource type="Curve2D" id="Curve2D_ig7tw"]
 _data = {
@@ -21,5 +22,9 @@ curve = SubResource("Curve2D_ig7tw")
 [node name="FlySpawnLocation" type="PathFollow2D" parent="FlyPath"]
 
 [node name="FlySpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Spider" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(290, 294)
 
 [connection signal="timeout" from="FlySpawnTimer" to="." method="_on_fly_spawn_timer_timeout"]
