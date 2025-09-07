@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cx2nxtcrodub4"]
+[gd_scene load_steps=7 format=3 uid="uid://cx2nxtcrodub4"]
 
 [ext_resource type="Script" uid="uid://h1ar55xsdmwn" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://de0renl7wmjg4" path="res://web.tscn" id="1_ig7tw"]
@@ -9,6 +9,15 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 600, 0, 0, 0, 0, 0, 600, 600, 0, 0, 0, 0, 0, 600, 0, 0, 0, 0, 0, 0)
 }
 point_count = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+bg_color = Color(0.0852315, 0.587487, 0, 1)
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+
+[sub_resource type="Theme" id="Theme_1bvp3"]
+ProgressBar/styles/background = null
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_1bvp3")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0xm2m")
@@ -22,9 +31,26 @@ curve = SubResource("Curve2D_ig7tw")
 [node name="FlySpawnLocation" type="PathFollow2D" parent="FlyPath"]
 
 [node name="FlySpawnTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 5.0
 
 [node name="Spider" parent="." instance=ExtResource("3_h2yge")]
 position = Vector2(290, 294)
 
+[node name="FoodTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+
+[node name="FoodBar" type="ProgressBar" parent="."]
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 329.0
+offset_bottom = 21.0
+theme = SubResource("Theme_1bvp3")
+max_value = 60.0
+value = 60.0
+show_percentage = false
+
 [connection signal="timeout" from="FlySpawnTimer" to="." method="_on_fly_spawn_timer_timeout"]
+[connection signal="ate_food" from="Spider" to="." method="_on_spider_ate_food"]
+[connection signal="timeout" from="FoodTimer" to="." method="_on_food_timer_timeout"]
+[connection signal="timeout" from="FoodTimer" to="Spider" method="_on_food_timer_timeout"]

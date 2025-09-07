@@ -5,11 +5,12 @@ var fly_scene = preload('res://fly.tscn')
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$FlySpawnTimer.start()
+	$FoodTimer.start()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	$FoodBar.value = $FoodTimer.time_left
 
 
 func _on_fly_spawn_timer_timeout() -> void:
@@ -25,3 +26,12 @@ func _on_fly_spawn_timer_timeout() -> void:
 	fly.linear_velocity = velocity.rotated(direction)
 	
 	add_child(fly)
+
+
+func _on_spider_ate_food() -> void:
+	$FoodTimer.start()
+
+
+func _on_food_timer_timeout() -> void:
+	print('spider has died')
+	#use this for game over logic
