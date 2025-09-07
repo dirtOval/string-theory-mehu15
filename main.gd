@@ -42,8 +42,10 @@ func _on_spider_ate_food() -> void:
 
 func _on_food_timer_timeout() -> void:
 	print('spider has died')
-	$FoodTimer.stop()
+	$LifeTimer.stop()
 	$FlySpawnTimer.stop()
+	$GameOverScreen/FinalScore.text = 'Spider Lived for ' + get_converted_time(score)
+	$GameOverScreen.show()
 	#use this for game over logic
 
 func get_converted_time(time: int) -> String:
@@ -64,3 +66,7 @@ func _on_string_prompt_start_game(string: String) -> void:
 	$FoodTimer.start()
 	$LifeTimer.start()
 	$Spider.show()
+
+
+func _on_button_pressed() -> void:
+	get_tree().reload_current_scene()

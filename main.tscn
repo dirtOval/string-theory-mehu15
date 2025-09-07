@@ -32,9 +32,9 @@ noise = SubResource("FastNoiseLite_lquwl")
 
 [sub_resource type="Curve2D" id="Curve2D_ig7tw"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 600, 0, 0, 0, 0, 0, 600, 600, 0, 0, 0, 0, 0, 600, 0, 0, 0, 0, 0, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 600, 0, 0, 0, 0, 0, 610.867, 384.711, 0, 0, 0, 0, 600, 600, 0, 0, 0, 0, 0, 600, 0, 0, 0, 0, 0, 0)
 }
-point_count = 5
+point_count = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
 bg_color = Color(0.0852315, 0.587487, 0, 1)
@@ -96,9 +96,54 @@ metadata/_edit_use_anchors_ = true
 
 [node name="StringPrompt" parent="." instance=ExtResource("5_lquwl")]
 
+[node name="GameOverScreen" type="Node2D" parent="."]
+visible = false
+position = Vector2(16, 217)
+
+[node name="SpiderDied" type="Label" parent="GameOverScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -1.0
+offset_right = 568.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_1bvp3")
+theme_override_font_sizes/font_size = 100
+text = "spider has died"
+
+[node name="FinalScore" type="Label" parent="GameOverScreen"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 103.0
+offset_right = 471.0
+offset_bottom = 228.0
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_1bvp3")
+theme_override_font_sizes/font_size = 48
+text = "Spider lived for
+ 0 Minutes, 0 seconds"
+horizontal_alignment = 1
+
+[node name="Reset" type="Button" parent="GameOverScreen"]
+offset_left = 216.0
+offset_top = 337.0
+offset_right = 344.0
+offset_bottom = 376.0
+theme_override_fonts/font = ExtResource("4_1bvp3")
+theme_override_font_sizes/font_size = 24
+text = "Try Again?"
+
 [connection signal="timeout" from="FlySpawnTimer" to="." method="_on_fly_spawn_timer_timeout"]
 [connection signal="ate_food" from="Spider" to="." method="_on_spider_ate_food"]
 [connection signal="timeout" from="FoodTimer" to="." method="_on_food_timer_timeout"]
 [connection signal="timeout" from="FoodTimer" to="Spider" method="_on_food_timer_timeout"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
 [connection signal="start_game" from="StringPrompt" to="." method="_on_string_prompt_start_game"]
+[connection signal="pressed" from="GameOverScreen/Reset" to="." method="_on_button_pressed"]
