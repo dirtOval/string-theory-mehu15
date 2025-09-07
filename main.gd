@@ -31,6 +31,7 @@ func _on_fly_spawn_timer_timeout() -> void:
 	
 	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
 	fly.linear_velocity = velocity.rotated(direction)
+	fly.get_node('AnimatedSprite2D').flip_h = velocity.x > 0
 	
 	add_child(fly)
 	$FlySpawnTimer.start(randf_range(1, 45))
@@ -45,6 +46,7 @@ func _on_food_timer_timeout() -> void:
 	$LifeTimer.stop()
 	$FlySpawnTimer.stop()
 	$GameOverScreen/FinalScore.text = 'Spider Lived for ' + get_converted_time(score)
+	$DeathSound.play()
 	$GameOverScreen.show()
 	#use this for game over logic
 

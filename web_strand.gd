@@ -19,5 +19,7 @@ func _on_body_entered(body: Node2D) -> void:
 	var die_roll = randi_range(0, 2)
 	if die_roll == 2:
 		body.get_node("AnimatedSprite2D").animation = 'stuck'
+		body.get_node('BuzzSound').stop()
+		body.get_node('CaughtSound').play()
 		body.linear_velocity = Vector2(0, 0)
 		body.add_to_group('caught_flies')

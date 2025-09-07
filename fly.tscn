@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://nj6x38o0gjav"]
+[gd_scene load_steps=7 format=3 uid="uid://nj6x38o0gjav"]
 
 [ext_resource type="Script" uid="uid://bjo1wl1urv3rf" path="res://fly.gd" id="1_7c42i"]
-[ext_resource type="Texture2D" uid="uid://bqtnv5j0gve0o" path="res://art/temp-fly.png" id="1_qarim"]
-[ext_resource type="Texture2D" uid="uid://dg48hrgo4x3dw" path="res://art/temp-stuck.png" id="2_7c42i"]
+[ext_resource type="Texture2D" uid="uid://byqwy2dgeh6gc" path="res://art/fly_flying1.png" id="2_qarim"]
+[ext_resource type="AudioStream" uid="uid://cem47csmri4jq" path="res://sound/short-house-fly.wav" id="3_7c42i"]
+[ext_resource type="AudioStream" uid="uid://cn3m7yfcb8vk4" path="res://sound/463395__vilkas_sound__vs-pop_5.mp3" id="4_6cv6t"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6cv6t"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_qarim")
+"texture": ExtResource("2_qarim")
 }],
 "loop": true,
 "name": &"fly",
@@ -16,7 +17,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_7c42i")
+"texture": ExtResource("2_qarim")
 }],
 "loop": true,
 "name": &"stuck",
@@ -24,7 +25,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qarim"]
-size = Vector2(16, 16)
+size = Vector2(30, 27)
 
 [node name="Fly" type="RigidBody2D"]
 collision_layer = 2
@@ -34,14 +35,24 @@ script = ExtResource("1_7c42i")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_6cv6t")
-animation = &"fly"
+animation = &"stuck"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1.5)
 shape = SubResource("RectangleShape2D_qarim")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 scale = Vector2(0.8, 0.8)
+
+[node name="BuzzSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7c42i")
+volume_db = -5.0
+pitch_scale = 0.77
+autoplay = true
+
+[node name="CaughtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_6cv6t")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

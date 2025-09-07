@@ -8,7 +8,7 @@ signal ate_food
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spider_state = 'wait'
-	$AnimatedSprite2D.animation = 'wait'
+	$AnimatedSprite2D.play('wait')
 	hide()
 
 
@@ -19,7 +19,8 @@ func _process(delta: float) -> void:
 	elif spider_state == 'select':
 		spider_target = find_closest_food()
 		spider_state = 'walking'
-		$AnimatedSprite2D.animation = 'walk'
+		#$AnimatedSprite2D.animation = 'walk'
+		$AnimatedSprite2D.play('walk')
 	elif spider_state == 'walking':
 		go_to_food(delta)
 	else:
@@ -47,16 +48,17 @@ func go_to_food(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	spider_target = null
 	spider_state = 'eat'
-	$AnimatedSprite2D.animation = 'eat'
-	body.queue_free()
+	$AnimatedSprite2D.play('eat', 1.0)
 	print('yom')
 	await get_tree().create_timer(1.0).timeout
+	$ChompSound.play()
 	#send a signal to timer to restart
+	body.queue_free()
 	ate_food.emit()
 	spider_state = 'wait'
-	$AnimatedSprite2D.animation = 'wait'
+	$AnimatedSprite2D.play('wait')
 
 
 func _on_food_timer_timeout() -> void:
 	spider_state = 'dead'
-	$AnimatedSprite2D.animation = 'dead'
+	$AnimatedSprite2D.play('dead')

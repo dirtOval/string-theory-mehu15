@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cx2nxtcrodub4"]
+[gd_scene load_steps=13 format=3 uid="uid://cx2nxtcrodub4"]
 
 [ext_resource type="Script" uid="uid://h1ar55xsdmwn" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://de0renl7wmjg4" path="res://web.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dx4pwjmvovlrg" path="res://spider.tscn" id="3_h2yge"]
 [ext_resource type="FontFile" uid="uid://cbw5g0agpoxpl" path="res://Staatliches-Regular.ttf" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://t5tjynssfk75" path="res://string_prompt.tscn" id="5_lquwl"]
+[ext_resource type="AudioStream" uid="uid://cslwbxsudhbdw" path="res://sound/343999__reitanna__something-dying.wav" id="6_7mycd"]
 
 [sub_resource type="Gradient" id="Gradient_1bvp3"]
 offsets = PackedFloat32Array(0.2, 0.613333, 0.986667, 1)
@@ -139,6 +140,11 @@ offset_bottom = 376.0
 theme_override_fonts/font = ExtResource("4_1bvp3")
 theme_override_font_sizes/font_size = 24
 text = "Try Again?"
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_7mycd")
+volume_db = -5.0
+pitch_scale = 0.45
 
 [connection signal="timeout" from="FlySpawnTimer" to="." method="_on_fly_spawn_timer_timeout"]
 [connection signal="ate_food" from="Spider" to="." method="_on_spider_ate_food"]

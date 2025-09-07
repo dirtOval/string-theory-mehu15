@@ -1,16 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://dx4pwjmvovlrg"]
+[gd_scene load_steps=11 format=3 uid="uid://dx4pwjmvovlrg"]
 
 [ext_resource type="Script" uid="uid://b7v2nw5g2cdn1" path="res://spider.gd" id="1_binfs"]
-[ext_resource type="Texture2D" uid="uid://baejj18rbivnx" path="res://art/temp-dead.png" id="1_vivtl"]
-[ext_resource type="Texture2D" uid="uid://f1hbw2h10sti" path="res://art/temp-eat.png" id="2_binfs"]
-[ext_resource type="Texture2D" uid="uid://drkircb7c4x23" path="res://art/temp-wait.png" id="3_2wdmt"]
-[ext_resource type="Texture2D" uid="uid://djr7evvlw01j1" path="res://art/temp-walk.png" id="4_bsryr"]
+[ext_resource type="Texture2D" uid="uid://2t7pjicjqcuh" path="res://art/spider_dead1.png" id="2_bsryr"]
+[ext_resource type="Texture2D" uid="uid://ds2hku0p2rg7g" path="res://art/spider_eat1.png" id="3_01nvu"]
+[ext_resource type="Texture2D" uid="uid://cuw1fjo0uwng0" path="res://art/spider_wait1.png" id="4_binfs"]
+[ext_resource type="Texture2D" uid="uid://baci2vc5i8y7k" path="res://art/spider_eat2.png" id="4_pwyhr"]
+[ext_resource type="Texture2D" uid="uid://dspfinx7ncvhv" path="res://art/spider_walk1.png" id="6_s326f"]
+[ext_resource type="Texture2D" uid="uid://sj5uamktyv6i" path="res://art/spider_walk2.png" id="7_x2avr"]
+[ext_resource type="AudioStream" uid="uid://c22gkdyma7e4w" path="res://sound/543386__thedragonsspark__nom-noise.wav" id="8_01nvu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b7f3m"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_vivtl")
+"texture": ExtResource("2_bsryr")
 }],
 "loop": true,
 "name": &"dead",
@@ -18,7 +21,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_binfs")
+"texture": ExtResource("3_01nvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_pwyhr")
 }],
 "loop": true,
 "name": &"eat",
@@ -26,7 +32,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_2wdmt")
+"texture": ExtResource("4_binfs")
 }],
 "loop": true,
 "name": &"wait",
@@ -34,7 +40,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_bsryr")
+"texture": ExtResource("6_s326f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_x2avr")
 }],
 "loop": true,
 "name": &"walk",
@@ -42,10 +51,9 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qvpyi"]
-size = Vector2(64, 64)
+size = Vector2(58, 41)
 
 [node name="Spider" type="Area2D"]
-scale = Vector2(0.5, 0.5)
 collision_mask = 2
 script = ExtResource("1_binfs")
 spider_speed = 200
@@ -53,9 +61,16 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_b7f3m")
-animation = &"wait"
+animation = &"walk"
+autoplay = "wait"
+speed_scale = 0.6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 2.5)
 shape = SubResource("RectangleShape2D_qvpyi")
+
+[node name="ChompSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_01nvu")
+volume_db = -5.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
