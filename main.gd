@@ -6,9 +6,7 @@ var score: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$FlySpawnTimer.start()
-	$FoodTimer.start()
-	$LifeTimer.start()
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,6 +33,7 @@ func _on_fly_spawn_timer_timeout() -> void:
 	fly.linear_velocity = velocity.rotated(direction)
 	
 	add_child(fly)
+	$FlySpawnTimer.start(randf_range(1, 45))
 
 
 func _on_spider_ate_food() -> void:
@@ -43,6 +42,8 @@ func _on_spider_ate_food() -> void:
 
 func _on_food_timer_timeout() -> void:
 	print('spider has died')
+	$FoodTimer.stop()
+	$FlySpawnTimer.stop()
 	#use this for game over logic
 
 func get_converted_time(time: int) -> String:
@@ -54,3 +55,12 @@ func get_converted_time(time: int) -> String:
 func _on_life_timer_timeout() -> void:
 	score += 1
 	$ScoreDisplay.text = str(get_converted_time(score))
+
+
+func _on_string_prompt_start_game(string: String) -> void:
+	print('game starting')
+	$Web.web_from_seed(hash(string))
+	$FlySpawnTimer.start()
+	$FoodTimer.start()
+	$LifeTimer.start()
+	$Spider.show()

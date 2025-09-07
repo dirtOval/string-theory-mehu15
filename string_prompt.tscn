@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://t5tjynssfk75"]
+
+[ext_resource type="FontFile" uid="uid://cbw5g0agpoxpl" path="res://Staatliches-Regular.ttf" id="1_2ek1b"]
+[ext_resource type="Script" uid="uid://bl4vdo3f3i4sy" path="res://string_prompt.gd" id="1_rx511"]
+
+[node name="StringPrompt" type="ColorRect"]
+offset_right = 600.0
+offset_bottom = 600.0
+color = Color(0.03, 0.03, 0.03, 0.529412)
+script = ExtResource("1_rx511")
+
+[node name="Input" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = 39.0
+offset_right = 159.5
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_2ek1b")
+theme_override_font_sizes/font_size = 30
+placeholder_text = "here"
+max_length = 24
+
+[node name="Instruction" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.444
+anchor_right = 0.5
+anchor_bottom = 0.444
+offset_left = -239.0
+offset_top = -49.4
+offset_right = 239.0
+offset_bottom = 75.6
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_2ek1b")
+theme_override_font_sizes/font_size = 100
+text = "ENTER STRING"
+
+[connection signal="text_submitted" from="Input" to="." method="_on_input_text_submitted"]

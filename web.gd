@@ -2,10 +2,12 @@ extends Node2D
 
 var web_strand = preload('res://web_strand.tscn')
 @export var strands: int
+var offset: int = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	random_web(strands)
+	#random_web(strands)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,6 +20,16 @@ func random_web(strands: int):
 	for i in range(strands):
 		var a = Vector2(randf_range(0, screen_width), randf_range(0, screen_height))
 		var b = Vector2(randf_range(0, screen_width), randf_range(0, screen_height))
+		add_strand(a, b)
+		
+func web_from_seed(seed: int):
+	var screen_width = get_viewport().size.x
+	var screen_height = get_viewport().size.y
+	seed(seed)
+	var strand_count: int = len(str(hash(seed)))
+	for i in range(strand_count):
+		var a = Vector2(randf_range(offset, screen_width - offset), randf_range(offset, screen_height - offset))
+		var b = Vector2(randf_range(offset, screen_width - offset), randf_range(offset, screen_height - offset))
 		add_strand(a, b)
 
 func add_strand(a: Vector2, b: Vector2):

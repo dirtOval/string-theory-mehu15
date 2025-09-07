@@ -9,6 +9,7 @@ signal ate_food
 func _ready() -> void:
 	spider_state = 'wait'
 	$AnimatedSprite2D.animation = 'wait'
+	hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
