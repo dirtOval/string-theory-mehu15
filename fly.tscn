@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://nj6x38o0gjav"]
+
+[ext_resource type="Script" uid="uid://bjo1wl1urv3rf" path="res://fly.gd" id="1_7c42i"]
+[ext_resource type="Texture2D" uid="uid://bqtnv5j0gve0o" path="res://art/temp-fly.png" id="1_qarim"]
+[ext_resource type="Texture2D" uid="uid://dg48hrgo4x3dw" path="res://art/temp-stuck.png" id="2_7c42i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6cv6t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qarim")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7c42i")
+}],
+"loop": true,
+"name": &"stuck",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qarim"]
+size = Vector2(16, 16)
+
+[node name="Fly" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_7c42i")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_6cv6t")
+animation = &"fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qarim")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.8, 0.8)

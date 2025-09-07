@@ -3,11 +3,17 @@
 [ext_resource type="Script" uid="uid://dflmy7wse0ub6" path="res://web_strand.gd" id="1_hxa1b"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_hxa1b"]
+resource_local_to_scene = true
 
 [node name="WebStrand" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_hxa1b")
 
 [node name="Line2D" type="Line2D" parent="."]
+width = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_hxa1b")
+one_way_collision_margin = 120.2
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

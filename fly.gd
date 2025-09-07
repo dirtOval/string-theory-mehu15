@@ -1,9 +1,6 @@
-extends Area2D
+extends RigidBody2D
 
-#func _init(a: Vector2, b: Vector2):
-	##set the X and Y of the line and collision shape
-	#$Line2D.add_point(a)
-	#$Line2D.add_point(b)
+signal stuck
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,5 +12,6 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_body_entered(body: Node2D) -> void:
-	print('aaaaa')
+#func _on_body_entered(body: Node) -> void:
+	#$AnimatedSprite2D.animation = 'stuck'
+	#print('aaaaaa')
